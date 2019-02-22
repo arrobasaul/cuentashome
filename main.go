@@ -2,8 +2,13 @@ package main
 
 import (
 	"fmt"
+
+	ent "./entidades"
 )
 
 func main() {
-	fmt.Println("Contabilidad de la casa")
+	d := ent.Cuenta{
+		CodCuenta: 1,
+	}
+	fmt.Println(d)
 }
