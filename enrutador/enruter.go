@@ -2,16 +2,20 @@ package enrutador
 
 import (
 	"fmt"
-	"image"
-	"image/color"
 	"net/http"
 
-	ent "../entidades"
-	"golang.org/x/tour/pic"
+	dto "../dto"
 )
 
 func Manejador(w http.ResponseWriter, r *http.Request) {
-	d := ent.Cuenta{
+	usuarios, error := dto.GetUsuarios()
+	if error != nil {
+		fmt.Println("errores")
+	} else {
+		fmt.Println(usuarios)
+		fmt.Println("correcto")
+	}
+	/*d := ent.Cuenta{
 		CodCuenta: 1,
 	}
 	fmt.Println(d)
@@ -29,6 +33,6 @@ func Manejador(w http.ResponseWriter, r *http.Request) {
 	m.Set(9, 9, color.RGBA{255, 255, 255, 255})
 
 	pic.ShowImage(m)
-	fmt.Fprintf(w, "algo", m)
-	//fmt.Fprintf(w, "Hola, %s, ¡este es un servidor!", r.URL.Path, m)
+	fmt.Fprintf(w, "algo", m)*/
+	fmt.Fprintf(w, "Hola, %s, ¡este es un servidor!", r.URL.Path)
 }

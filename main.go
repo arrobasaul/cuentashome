@@ -1,20 +1,15 @@
 package main
 
 import (
-	"image"
-	"image/color"
-	"image/jpeg"
-	"log"
 	"net/http"
-	"os"
 
 	ruter "./enrutador"
-	"golang.org/x/tour/pic"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
 
-	m := image.NewRGBA(image.Rect(0, 0, 10, 10))
+	/*m := image.NewRGBA(image.Rect(0, 0, 10, 10))
 	m.Set(0, 0, color.RGBA{0, 0, 0, 255})
 	m.Set(1, 1, color.RGBA{255, 255, 255, 255})
 	m.Set(2, 2, color.RGBA{0, 0, 0, 255})
@@ -24,16 +19,10 @@ func main() {
 	m.Set(6, 6, color.RGBA{0, 0, 0, 255})
 	m.Set(7, 7, color.RGBA{255, 255, 255, 255})
 	m.Set(8, 8, color.RGBA{0, 0, 0, 255})
-	m.Set(9, 9, color.RGBA{255, 255, 255, 255})
+	m.Set(9, 9, color.RGBA{255, 255, 255, 255})*/
+	//ent.Julia()
 
-	outFile, err := os.Create("img2.jpg")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer outFile.Close()
-	jpeg.Encode(outFile, m, nil)
-
-	pic.ShowImage(m)
+	//pic.ShowImage(m)
 	// Dx and Dy return a rectangle's width and height.
 	//fmt.Println(r.Dx(), r.Dy(), image.Pt(0, 0).In(r))
 	/*img, err := jpeg.Decode(m)
