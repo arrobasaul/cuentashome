@@ -42,8 +42,6 @@ func GetUsuario(id int) (*dto.Usuario, *dto.Errores) {
 	return &usuario, nil
 }
 func CreateUsuario(usuario dto.Usuario) (id int64) {
-	//err = db.QueryRow("select name from users where id = ?", 1).Scan(&name)
-	// run your query, fill in &u...
 	db := conn.Conexion()
 	insForm, err := db.Prepare("INSERT INTO usuarios(NombreUsuario, Correo, Password, Estado) VALUES(?,?,?,?)")
 	if err != nil {
