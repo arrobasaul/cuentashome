@@ -4,11 +4,13 @@ package entidades
 Cuenta estructura que manejara los valores de la cuenta
 */
 
-type Cuenta struct {
-	CodCuenta    int
-	NombreCuenta string
-	Valor        float32
-	Estado       int
+type Cuentas struct {
+	CodCuenta        int       `json:"CodCuenta" llave:"SI"`
+	DescripionCuenta string    `json:"DescripionCuenta"`
+	Valor            float32   `json:"Valor"`
+	Estado           int       `json:"Estado"`
+	FechaCuenta      string    `json:"FechaCuenta"`
+	Usuario          []Usuario `json:"usuario" Map:"NO"`
 }
 
 /*
