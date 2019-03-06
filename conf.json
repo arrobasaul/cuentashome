@@ -1,0 +1,8 @@
+{
+    "Groups": ["GroupA"],
+    "Conn": {
+        "Host":"local",
+        "Db":"midb",
+        "User":"miuser"
+    }
+}
