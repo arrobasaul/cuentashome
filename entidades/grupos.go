@@ -2,8 +2,9 @@ package entidades
 
 //Grupos todo los usuarios que conectaran con el sistema
 type Grupos struct {
-	CodCrupo    int       `json:"CodCrupo" llave:"SI"`
-	NombreGrupo string    `json:"NombreGrupo"`
-	Estado      int       `json:"Estado"`
-	Usuario     []Usuario `json:"usuario" Map:"NO"`
+	CodGrupo      int        `json:"CodGrupo" llave:"SI" schema:"si"`
+	NombreGrupo   string     `json:"NombreGrupo" schema:"si" langth:"100"`
+	Estado        int        `json:"Estado" schema:"si"`
+	FechaCreacion string     `json:"FechaCreacion" schema:"si" isFecha:"si"`
+	Usuarios      []Usuarios `json:"usuario" Map:"NO"`
 }

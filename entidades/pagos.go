@@ -10,5 +10,5 @@ type Pagos struct {
 	Valor           float32 `json:"Valor"`
 	Estado          int     `json:"Estado"`
 	CodUsuario      int     `json:"CodUsuario" FK:"SI"`
-	Usuario         `json:"usuario"`
+	Usuarios        `json:"usuario"`
 }
