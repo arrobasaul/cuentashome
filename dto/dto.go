@@ -11,12 +11,12 @@ type todo interface{}
 func GetAll(a interface{}) (*string, error) {
 
 	elementos := reflect.ValueOf(a).Elem()
-	nombre := reflect.TypeOf(a).Elem().Name()
+	nombre := strings.ToLower(reflect.TypeOf(a).Elem().Name())
 
 	var query string
 	query = "select "
 	for j := 0; j < elementos.NumField(); j++ {
-		nombreAtributo := elementos.Type().Field(j).Name
+		nombreAtributo := strings.ToLower(elementos.Type().Field(j).Name)
 		query += fmt.Sprintf(", %s ", nombreAtributo)
 	}
 
@@ -28,13 +28,13 @@ func GetAll(a interface{}) (*string, error) {
 func GetById(a interface{}, id int) (*string, error) {
 
 	elementos := reflect.ValueOf(a).Elem()
-	nombre := reflect.TypeOf(a).Elem().Name()
+	nombre := strings.ToLower(reflect.TypeOf(a).Elem().Name())
 	var Millave string
 	var query string
 	query = "select "
 	for j := 0; j < elementos.NumField(); j++ {
 
-		nombreAtributo := elementos.Type().Field(j).Name
+		nombreAtributo := strings.ToLower(elementos.Type().Field(j).Name)
 
 		llave := elementos.Type().Field(j).Tag.Get("llave")
 		if llave == "SI" {
@@ -50,7 +50,7 @@ func GetById(a interface{}, id int) (*string, error) {
 func InsertAll(a interface{}) (*string, error) {
 
 	elementos := reflect.ValueOf(a).Elem()
-	nombre := reflect.TypeOf(a).Elem().Name()
+	nombre := strings.ToLower(reflect.TypeOf(a).Elem().Name())
 
 	var query string
 	query = "insert into " + nombre + " set "
@@ -58,7 +58,7 @@ func InsertAll(a interface{}) (*string, error) {
 		//tag := typeField.Tag
 		//tag.Get("tag_name")
 
-		nombreAtributo := elementos.Type().Field(j).Name
+		nombreAtributo := strings.ToLower(elementos.Type().Field(j).Name)
 
 		switch elementos.Field(j).Kind() {
 		case reflect.Int:
@@ -72,12 +72,13 @@ func InsertAll(a interface{}) (*string, error) {
 		}
 	}
 	query = strings.Replace(query, "set ,", " set ", -1)
+	println(query)
 	return &query, nil
 }
 func UpdateById(a interface{}, id int) (*string, error) {
 
 	elementos := reflect.ValueOf(a).Elem()
-	nombre := reflect.TypeOf(a).Elem().Name()
+	nombre := strings.ToLower(reflect.TypeOf(a).Elem().Name())
 	var Millave string
 	var query string
 	query = "update " + nombre + " set "
@@ -85,7 +86,7 @@ func UpdateById(a interface{}, id int) (*string, error) {
 		//tag := typeField.Tag
 		//tag.Get("tag_name")
 
-		nombreAtributo := elementos.Type().Field(j).Name
+		nombreAtributo := strings.ToLower(elementos.Type().Field(j).Name)
 		llave := elementos.Type().Field(j).Tag.Get("llave")
 		if llave == "SI" {
 			Millave = nombreAtributo

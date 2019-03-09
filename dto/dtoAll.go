@@ -1,5 +1,6 @@
 package dto
 
+/*
 import (
 	conn "../conn"
 	dto "../entidades"
@@ -26,3 +27,4 @@ func GetAll() (*interface{}, error) {
 
 	return &usuarios, nil
 }
+*/

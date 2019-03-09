@@ -2,11 +2,11 @@ package dto
 
 import (
 	conn "../conn"
-	dto "../entidades"
+	entidades "../entidades"
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func GetUsuarios() (*[]dto.Usuario, error) {
+func GetUsuarios() (*[]entidades.Usuarios, error) {
 
 	// run your query, fill in &u...
 	db := conn.Conexion()
@@ -14,8 +14,8 @@ func GetUsuarios() (*[]dto.Usuario, error) {
 	if err != nil {
 		panic(err.Error())
 	}
-	usuario := dto.Usuario{}
-	usuarios := []dto.Usuario{}
+	usuario := entidades.Usuarios{}
+	usuarios := []entidades.Usuarios{}
 	for result.Next() {
 		err = result.Scan(&usuario.CodUsuario, &usuario.NombreUsuario)
 		if err != nil {
@@ -27,28 +27,33 @@ func GetUsuarios() (*[]dto.Usuario, error) {
 
 	return &usuarios, nil
 }
-func GetUsuario(id int) (*dto.Usuario, *dto.Errores) {
+func GetUsuario(id int) (*entidades.Usuarios, *entidades.Errores) {
 
 	// run your query, fill in &u...
 	db := conn.Conexion()
-	usuario := dto.Usuario{}
-	var error2 dto.Errores
+	usuario := entidades.Usuarios{}
+	var error2 entidades.Errores
 	println(id)
 	err := db.QueryRow("SELECT CodUsuario, NombreUsuario, Correo, Password, Estado FROM usuarios where CodUsuario=?", id).Scan(&usuario.CodUsuario, &usuario.NombreUsuario, &usuario.Correo, &usuario.Password, &usuario.Estado)
 	if err != nil {
-		error2 = dto.Errores{Error: err.Error(), Descripcion: "no encontrado"}
+		error2 = entidades.Errores{Error: err.Error(), Descripcion: "no encontrado"}
 		return nil, &error2
 	}
 	return &usuario, nil
 }
-func CreateUsuario(usuario dto.Usuario) (id int64) {
+func CreateUsuario(usuario entidades.Usuarios) (id int64) {
 	db := conn.Conexion()
-	insForm, err := db.Prepare("INSERT INTO usuarios(NombreUsuario, Correo, Password, Estado) VALUES(?,?,?,?)")
+
+	query, _ := InsertAll(&usuario)
+
+	insForm, err := db.Prepare(*query)
 	if err != nil {
 		panic(err.Error())
 	}
 	defer db.Close()
-	res, err := insForm.Exec(usuario.NombreUsuario, usuario.Correo, usuario.Password, usuario.Estado)
+	//res, err := insForm.Exec(usuario.NombreUsuario, usuario.Correo, usuario.Password, usuario.Estado)
+
+	res, err := insForm.Exec()
 	if err != nil {
 		panic(err.Error())
 	} else {

@@ -11,15 +11,18 @@ import (
 )
 
 func GetUsuarios(w http.ResponseWriter, r *http.Request) {
-	usuarios, error := dto.GetUsuarios()
-	if error != nil {
-		fmt.Println("errores")
-	} else {
-		w.WriteHeader(http.StatusOK)
-		w.Header().Set("Content-Type", "application/json")
-		fmt.Println("correcto")
-		json.NewEncoder(w).Encode(&usuarios)
+	if r.Method == "GET" {
+		usuarios, error := dto.GetUsuarios()
+		if error != nil {
+			fmt.Println("errores")
+		} else {
+			w.WriteHeader(http.StatusOK)
+			w.Header().Set("Content-Type", "application/json")
+			fmt.Println("correcto")
+			json.NewEncoder(w).Encode(&usuarios)
+		}
 	}
+
 	//fmt.Fprintf(w, "Hola, %s, ¡este es un servidor!", r.URL.Path)
 }
 func GetUsuario(w http.ResponseWriter, r *http.Request) {
@@ -31,7 +34,7 @@ func GetUsuario(w http.ResponseWriter, r *http.Request) {
 		// handle error
 		fmt.Println(err)
 		decoder := json.NewDecoder(r.Body)
-		var usuario entidades.Usuario
+		var usuario entidades.Usuarios
 		err = decoder.Decode(&usuario)
 		if err != nil {
 			json.NewEncoder(w).Encode(&entidades.Errores{Error: err.Error(), Descripcion: "no se envian datos"})
@@ -56,7 +59,7 @@ func GetUsuario(w http.ResponseWriter, r *http.Request) {
 }
 func CreateUsuario(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
-	var usuario entidades.Usuario
+	var usuario entidades.Usuarios
 	err := decoder.Decode(&usuario)
 	fmt.Println(usuario)
 	if err != nil {

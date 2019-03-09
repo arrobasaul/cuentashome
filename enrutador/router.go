@@ -1,7 +1,9 @@
 package enrutador
 
-import "github.com/gorilla/mux"
+import "net/http"
 
-func GetRouter() (router *mux.Router) {
-	return mux.NewRouter()
+func GetRouter() (router *http.ServeMux) {
+	mux := http.NewServeMux()
+	return mux
+	//return mux.NewRouter()
 }
