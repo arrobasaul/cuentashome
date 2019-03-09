@@ -1,6 +1,8 @@
 package enrutador
 
-import "net/http"
+import (
+	"net/http"
+)
 
 func GetRouter() (router *http.ServeMux) {
 	mux := http.NewServeMux()

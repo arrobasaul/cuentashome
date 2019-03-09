@@ -2,9 +2,9 @@ package entidades
 
 //Usuario todo los usuarios que conectaran con el sistema
 type Usuarios struct {
-	CodUsuario    int    `json:"CodUsuario" llave:"SI"`
-	NombreUsuario string `json:"NombreUsuario"`
-	Correo        string `json:"Correo"`
-	Password      string `json:"Password"`
-	Estado        int    `json:"Estado"`
+	CodUsuarios   int    `json:"CodUsuario" llave:"SI" schema:"si"`
+	NombreUsuario string `json:"NombreUsuario" schema:"si"`
+	Correo        string `json:"Correo" schema:"si"`
+	Password      string `json:"Password" schema:"si"`
+	Estado        int    `json:"Estado" schema:"si"`
 }

@@ -5,11 +5,11 @@ Cuenta estructura que manejara los valores de la cuenta
 */
 
 type Deudas struct {
-	CodDeuda        int        `json:"CodDeuda" llave:"SI"`
-	DescripionDeuda string     `json:"DescripionDeuda"`
-	Valor           float32    `json:"Valor"`
-	Estado          int        `json:"Estado"`
-	FechaDeuda      string     `json:"FechaDeuda"`
+	CodDeudas       int        `json:"CodDeudas" llave:"SI" schema:"si"`
+	DescripionDeuda string     `json:"DescripionDeuda" schema:"si"`
+	Valor           float32    `json:"Valor" schema:"si"`
+	Estado          int        `json:"Estado" schema:"si"`
+	FechaDeuda      string     `json:"FechaDeuda" schema:"si" isFecha:"si"`
 	Usuarios        []Usuarios `json:"usuario" Map:"NO"`
 }
 

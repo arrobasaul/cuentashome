@@ -17,7 +17,7 @@ func GetUsuarios() (*[]entidades.Usuarios, error) {
 	usuario := entidades.Usuarios{}
 	usuarios := []entidades.Usuarios{}
 	for result.Next() {
-		err = result.Scan(&usuario.CodUsuario, &usuario.NombreUsuario)
+		err = result.Scan(&usuario.CodUsuarios, &usuario.NombreUsuario)
 		if err != nil {
 			panic(err.Error())
 		}
@@ -34,7 +34,7 @@ func GetUsuario(id int) (*entidades.Usuarios, *entidades.Errores) {
 	usuario := entidades.Usuarios{}
 	var error2 entidades.Errores
 	println(id)
-	err := db.QueryRow("SELECT CodUsuario, NombreUsuario, Correo, Password, Estado FROM usuarios where CodUsuario=?", id).Scan(&usuario.CodUsuario, &usuario.NombreUsuario, &usuario.Correo, &usuario.Password, &usuario.Estado)
+	err := db.QueryRow("SELECT CodUsuario, NombreUsuario, Correo, Password, Estado FROM usuarios where CodUsuario=?", id).Scan(&usuario.CodUsuarios, &usuario.NombreUsuario, &usuario.Correo, &usuario.Password, &usuario.Estado)
 	if err != nil {
 		error2 = entidades.Errores{Error: err.Error(), Descripcion: "no encontrado"}
 		return nil, &error2

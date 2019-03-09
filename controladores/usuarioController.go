@@ -8,8 +8,24 @@ import (
 
 	dto "../dto"
 	entidades "../entidades"
+	servicios "../servicios"
 )
 
+func GetDeudas(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		deudas, error := servicios.GetDeudas(3)
+		if error != nil {
+			fmt.Println("errores")
+		} else {
+			w.WriteHeader(http.StatusOK)
+			w.Header().Set("Content-Type", "application/json")
+			fmt.Println("correcto")
+			json.NewEncoder(w).Encode(&deudas)
+		}
+	}
+
+	//fmt.Fprintf(w, "Hola, %s, ¡este es un servidor!", r.URL.Path)
+}
 func GetUsuarios(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		usuarios, error := dto.GetUsuarios()
@@ -39,7 +55,7 @@ func GetUsuario(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			json.NewEncoder(w).Encode(&entidades.Errores{Error: err.Error(), Descripcion: "no se envian datos"})
 		} else {
-			usua, error2 := dto.GetUsuario(usuario.CodUsuario)
+			usua, error2 := dto.GetUsuario(usuario.CodUsuarios)
 			if error2 != nil {
 				json.NewEncoder(w).Encode(&error2)
 			} else {
