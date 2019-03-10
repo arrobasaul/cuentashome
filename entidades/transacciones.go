@@ -11,5 +11,5 @@ type Transacciones struct {
 	Valor            float32 `json:"Valor" schema:"si"`
 	FechaCuenta      string  `json:"FechaDeuda" schema:"si" isFecha:"si"`
 	Estado           int     `json:"Estado" schema:"si"`
-	Pagos            []Pagos `json:"usuario" Map:"NO"`
+	//Pagos            []Pagos `json:"usuario" Map:"NO"`
 }

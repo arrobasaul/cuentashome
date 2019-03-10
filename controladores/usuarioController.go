@@ -44,7 +44,7 @@ func GetUsuarios(w http.ResponseWriter, r *http.Request) {
 func GetUsuario(w http.ResponseWriter, r *http.Request) {
 	//params := mux.Vars(r)
 	//id := params["CodUsuario"]
-	keys := r.URL.Query().Get("CodUsuario")
+	keys := r.URL.Query().Get("CodUsuarios")
 	i, err := strconv.Atoi(keys)
 	if err != nil {
 		// handle error
