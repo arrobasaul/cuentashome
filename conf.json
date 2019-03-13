@@ -1,8 +1,11 @@
 {
-    "Groups": ["GroupA"],
-    "Conn": {
+    "ConnMYSQL": {
         "Host":"local",
         "Db":"midb",
-        "User":"miuser"
+        "User":"miuser",
+        "Pass":"my pass"
+    },
+    "Globales":{
+        "Env":"Pruebas"
     }
 }

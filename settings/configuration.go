@@ -4,27 +4,18 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-)
 
-type Conn struct {
-	Host string
-	Db   string
-	User string
-}
-type Configuration struct {
-	Users  []string
-	Groups []string
-	Conn   Conn
-}
+	entidades "../entidades"
+)
 
 func Setting() {
 	file, _ := os.Open("../conf.json")
 	defer file.Close()
 	decoder := json.NewDecoder(file)
-	configuration := Configuration{}
-	err := decoder.Decode(&configuration)
+	Conf := entidades.Conf{}
+	err := decoder.Decode(&Conf)
 	if err != nil {
 		fmt.Println("error:", err)
 	}
-	fmt.Println(configuration.Users) // output: [UserA, UserB]
+	fmt.Println(Conf.ConnMYSQL.User) // output: [UserA, UserB]
 }
